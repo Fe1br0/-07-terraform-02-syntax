@@ -4,6 +4,7 @@ terraform {
       source = "yandex-cloud/yandex"
     }
   }
+  required_version = ">= 0.13"
 }
 
 provider "yandex" {
@@ -18,7 +19,7 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_vpc_network" "net" {
-  name = "Mynet"
+  name = "Netolgynet"
 }
 
 resource "yandex_vpc_subnet" "subnet" {
@@ -29,6 +30,7 @@ resource "yandex_vpc_subnet" "subnet" {
 }
 
 resource "yandex_compute_instance" "vm" {
+  zone       = "ru-central1-a"
   name        = "newinstance"
   hostname    = "newinstance.local"
   platform_id = "standard-v1"
@@ -57,3 +59,4 @@ resource "yandex_compute_instance" "vm" {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
+        
